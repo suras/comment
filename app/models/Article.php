@@ -7,4 +7,16 @@ class Article extends Eloquent {
 		'title' => 'required',
 		'body' => 'required'
 	);
+
+
+	 public function comments()
+    {
+        return $this->hasMany('Comment');
+    }
+
+
+      public function endorsements()
+    {
+        return $this->hasMany('Endorsement');
+    }
 }

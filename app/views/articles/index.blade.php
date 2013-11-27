@@ -18,7 +18,7 @@
 		<tbody>
 			@foreach ($articles as $article)
 				<tr>
-					<td>{{{ $article->title }}}</td>
+					<td>{{ link_to_route('articles.show', $article->title, array($article->id), array('class' => 'btn btn-info')) }}</td>
 					<td>{{{ $article->body }}}</td>
                     <td>{{ link_to_route('articles.edit', 'Edit', array($article->id), array('class' => 'btn btn-info')) }}</td>
                     <td>
