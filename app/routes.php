@@ -17,3 +17,9 @@
 // });
 
 Route::controller('users', 'UsersController');
+
+Route::resource('articles', 'ArticlesController');
+
+Route::resource('comments', 'CommentsController');
+
+Route::resource('endorsements', 'EndorsementsController');
