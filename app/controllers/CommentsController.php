@@ -9,9 +9,12 @@ class CommentsController extends BaseController {
 	 */
 	protected $comment;
 
+
+
 	public function __construct(Comment $comment)
 	{
 		$this->comment = $comment;
+		$this->beforeFilter('auth', array('only'=>array('store')));
 	}
 
 	/**
@@ -43,22 +46,46 @@ class CommentsController extends BaseController {
 	 */
 	public function store()
 	{
-		$input = Input::all();
-		$validation = Validator::make($input, Comment::$rules);
-
-		if ($validation->passes())
+		if (Request::ajax())
 		{
-			$this->comment->create($input);
+		    $input = Input::all();
+			$validation = Validator::make($input, Comment::$rules);
 
-			return Redirect::route('comments.index');
+			if ($validation->passes())
+			{
+				$comment = $this->comment->create($input);
+
+				#return Redirect::route('comments.index');
+				return $comment->message;
+			}
+			else
+			{
+
+                return "error";
+            }
+			// return Redirect::route('comments.create')
+			// 	->withInput()
+			// 	->withErrors($validation)
+			// 	->with('message', 'There were validation errors.');
 		}
+	else
+		{
+			$input = Input::all();
+			$validation = Validator::make($input, Comment::$rules);
 
-		return Redirect::route('comments.create')
-			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			if ($validation->passes())
+			{
+				$this->comment->create($input);
+
+				return Redirect::route('comments.index');
+			}
+
+			return Redirect::route('comments.create')
+				->withInput()
+				->withErrors($validation)
+				->with('message', 'There were validation errors.');
+		 }
 	}
-
 	/**
 	 * Display the specified resource.
 	 *

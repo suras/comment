@@ -10,7 +10,8 @@ class ArticlesController extends BaseController {
 	protected $article;
 
 	public function __construct(Article $article)
-	{
+	{   
+		$this->beforeFilter('auth', array('only'=>array('show','create')));
 		$this->article = $article;
 	}
 
@@ -68,8 +69,9 @@ class ArticlesController extends BaseController {
 	public function show($id)
 	{
 		$article = $this->article->findOrFail($id);
-
-		return View::make('articles.show', compact('article'));
+		$comments = $article->comments;
+        $article_owner = $article->user;
+		return View::make('articles.show', compact('article', 'comments', 'article_owner'));
 	}
 
 	/**

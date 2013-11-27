@@ -1,4 +1,4 @@
-@extends('layouts.scaffold')
+@extends('layouts.main')
 
 @section('main')
 

@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 		<style>
 			table form { margin-bottom: 0; }

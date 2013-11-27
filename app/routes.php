@@ -16,6 +16,8 @@
 // 	return View::make('hello');
 // });
 
+Route::get('/', 'ArticlesController@index');
+
 Route::controller('users', 'UsersController');
 
 Route::resource('articles', 'ArticlesController');

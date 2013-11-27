@@ -1,4 +1,4 @@
-@extends('layouts.scaffold')
+@extends('layouts.main')
 
 @section('main')
 
@@ -18,14 +18,14 @@
 		<tbody>
 			@foreach ($articles as $article)
 				<tr>
-					<td>{{ link_to_route('articles.show', $article->title, array($article->id), array('class' => 'btn btn-info')) }}</td>
+					<td>{{ link_to_route('articles.show', $article->title, array($article->id), array('class' => 'show_link')) }}</td>
 					<td>{{{ $article->body }}}</td>
-                    <td>{{ link_to_route('articles.edit', 'Edit', array($article->id), array('class' => 'btn btn-info')) }}</td>
+                    <!-- <td>{{ link_to_route('articles.edit', 'Edit', array($article->id), array('class' => 'btn btn-info')) }}</td>
                     <td>
                         {{ Form::open(array('method' => 'DELETE', 'route' => array('articles.destroy', $article->id))) }}
                             {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
                         {{ Form::close() }}
-                    </td>
+                    </td> -->
 				</tr>
 			@endforeach
 		</tbody>
