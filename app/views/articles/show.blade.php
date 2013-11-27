@@ -42,9 +42,10 @@ $(document).ready(function(){
         type: 'POST',
         data: {id:{{$article->id}}},
         success: function(res){
-        	$("#endorse").attr('value', 'Endorsed');
-        	$("#endorse").attr("disabled", "disabled");
-        	alert(res);
+        	//$("#endorse").attr('value', 'Endorsed');
+        	//$("#endorse").attr("disabled", "disabled");
+        	$("#endorse").html(res);
+        	//alert(res);
          }
 	  });
    });
@@ -59,9 +60,10 @@ $(document).ready(function(){
         type: 'POST',
         data: postData,
         success: function(res){
-        	$( "#comment_form" ).hide();
-        	$('#message').val(" ");
- 	        $('#comments').append("<li>"+res+"</li>");
+        	// $( "#comment_form" ).hide();
+        	// $('#message').val(" ");
+ 	       //  $('#comments').append("<li>"+res+"</li>");
+ 	       location.reload();
                   
          }
     });
@@ -92,7 +94,7 @@ $(document).ready(function(){
 					@if(count($is_endorsed) <= 0)
 					  <td><button id="endorse">Endorse</button></td>
 					@else
-                      <td><button id="endorse" disabled>Endorse</button></td>
+                      <td><button id="endorse" >Un Endorse</button></td>
 					@endif 
 					
                     <!-- <td>{{ link_to_route('articles.edit', 'Edit', array($article->id), array('class' => 'btn btn-info')) }}</td> -->

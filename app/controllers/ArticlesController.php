@@ -140,18 +140,17 @@ class ArticlesController extends BaseController {
 	      $endorsement = new Endorsement;
 	      $endorsement->article_id = Input::get('id');
 	      $endorsement->user_id = Auth::user()->id;
-	      if($endorsement->save())
-	      {
-	        return "success";
-	      }
-	      else
-	      {
-	        return "error";
-	      }
+	      $endorsement->save();
+	        return "Un Endorse";
+	      
+	        
+	      
       }
       else
       {
-      	return "Already Endrosed";
+      	$endorse = Endorsement::find($is_endorsed->id);
+      	$endorse->delete();
+      	return "Endorse";
       }
     
 	}
