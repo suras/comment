@@ -2,6 +2,34 @@
 
 @section('main')
 <script>
+
+function setFlag(id, flag_name)
+	{
+		//alert(id);
+		 $.ajax({
+        url: "flag",
+        type: 'POST',
+        data: {id:id, flag_name:flag_name},
+        success: function(res){
+        	if(flag_name == "appropriate")
+        	{
+
+              var flag_text = "inappropriate";
+        	}
+        	else
+        	{
+        		var flag_text = "appropriate";
+        	}
+        	$("#flag"+id).html('flag as <a href="#" class="flag_text" id="'+id+'">'+flag_text+'</a>');
+         }
+	  });
+  }
+
+$(document).on('click','.flag_text',function(){
+	console.log($(this).attr('id'),$(this).text());
+	setFlag($(this).attr('id'),$(this).text());
+})
+
 $(document).ready(function(){
 	$( "#comment_form" ).hide();
 	$("#add_comment").click(function(){
@@ -20,6 +48,9 @@ $(document).ready(function(){
          }
 	  });
    });
+
+
+	
  $('#comment_ajax').submit(function(e){
     var postData = $(this).serializeArray();
     var formURL = $(this).attr("action");
@@ -79,7 +110,13 @@ $(document).ready(function(){
 			@foreach ($comments as $comment)
 				
 				<li>{{{ $comment->message }}}</li>
-                    
+				<li>{{{ $comment->created_at }}}</li>
+				@if($comment->flag == "inappropriate")
+
+				<li id="flag{{$comment->id}}">flag as <a href="#" id="flag" onclick="setFlag({{$comment->id}},'appropriate')"> appropriate</a></li>
+                @else
+                  <li id="flag{{$comment->id}}">flag as <a href="#" onclick="setFlag({{$comment->id}},'inappropriate')" id="flag">inappropriate</a></li>
+               @endif   
 			@endforeach
 			</ul>		
 </div>

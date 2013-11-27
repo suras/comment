@@ -18,6 +18,7 @@
 
 Route::get('/', 'ArticlesController@index');
 Route::post('/articles/endorse', 'ArticlesController@endorse');
+Route::post('/articles/flag', 'CommentsController@flag');
 
 Route::controller('users', 'UsersController');
 

@@ -155,4 +155,25 @@ class CommentsController extends BaseController {
 		return Redirect::route('comments.index');
 	}
 
+
+	public function flag()
+	{
+      
+      $flag = Input::get('flag_name');
+      $id =  Input::get('id');
+      $comment = $this->comment->find($id);
+	  $comment->flag =  Input::get('flag_name');
+	  if($comment->save())
+	  {
+	  	return "success";
+	  }
+	  else
+	  {
+	  	return "error";
+	  }
+     
+
+
+	}
+
 }
