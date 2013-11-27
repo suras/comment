@@ -130,4 +130,21 @@ class ArticlesController extends BaseController {
 		return Redirect::route('articles.index');
 	}
 
+
+	public function endorse()
+	{
+      
+      $endorsement = new Endorsement;
+      $endorsement->article_id = Input::get('id');
+      $endorsement->user_id = Auth::user()->id;
+      if($endorsement->save())
+      {
+       return "success";
+      }
+      else
+      {
+       return "error";
+      }
+	}
+
 }

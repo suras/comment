@@ -17,6 +17,7 @@
 // });
 
 Route::get('/', 'ArticlesController@index');
+Route::post('/articles/endorse', 'ArticlesController@endorse');
 
 Route::controller('users', 'UsersController');
 

@@ -7,6 +7,19 @@ $(document).ready(function(){
 	$("#add_comment").click(function(){
      $( "#comment_form" ).toggle();
 	})
+
+	$("#endorse").click(function(){
+		 $.ajax({
+        url: "endorse",
+        type: 'POST',
+        data: {id:{{$article->id}}},
+        success: function(res){
+        	$("#endorse").attr('value', 'Endorsed');
+        	$("#endorse").attr("disabled", "disabled");
+        	alert(res);
+         }
+	  });
+   });
  $('#comment_ajax').submit(function(e){
     var postData = $(this).serializeArray();
     var formURL = $(this).attr("action");
@@ -37,6 +50,7 @@ $(document).ready(function(){
 		<tr>
 			<th>Title</th>
 				<th>Body</th>
+				<th>Endorse</th>
 		</tr>
 	</thead>
 
@@ -44,6 +58,7 @@ $(document).ready(function(){
 		<tr>
 			<td>{{{ $article->title }}}</td>
 					<td>{{{ $article->body }}}</td>
+					<td><button id="endorse">Endorse</button></td>
                     <!-- <td>{{ link_to_route('articles.edit', 'Edit', array($article->id), array('class' => 'btn btn-info')) }}</td> -->
                     <!-- <td>
                         {{ Form::open(array('method' => 'DELETE', 'route' => array('articles.destroy', $article->id))) }}
