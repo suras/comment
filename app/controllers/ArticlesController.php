@@ -69,7 +69,8 @@ class ArticlesController extends BaseController {
 	public function show($id)
 	{
 		$article = $this->article->findOrFail($id);
-		$comments = $article->comments;
+		$comments = Comment::where("article_id", $article->id )->paginate(3);
+		//$comments = $article->comments;
         $article_owner = $article->user;
         $is_endorsed = DB::table('endorsements')->where('article_id', $id)->where('user_id', Auth::user()->id)->first();
 		return View::make('articles.show', compact('article', 'comments', 'article_owner', 'is_endorsed'));

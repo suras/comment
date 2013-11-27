@@ -5,7 +5,7 @@ class Comment extends Eloquent {
 
 	public static $rules = array(
 		'user_id' => 'required',
-		'message' => 'required',
+		'message' => 'required|max:250',
 		'article_id' => 'required'
 	);
 

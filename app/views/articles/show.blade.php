@@ -123,7 +123,7 @@ $(document).ready(function(){
 			</ul>		
 </div>
 
-
+  {{$comments->links()}}
 <button id="add_comment">Add Comment</button>
 <div id="comment_form">
 {{ Form::open(array('route' => 'comments.store', 'id'=>'comment_ajax')) }}
