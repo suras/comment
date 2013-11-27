@@ -58,7 +58,12 @@ $(document).ready(function(){
 		<tr>
 			<td>{{{ $article->title }}}</td>
 					<td>{{{ $article->body }}}</td>
-					<td><button id="endorse">Endorse</button></td>
+					@if(count($is_endorsed) <= 0)
+					  <td><button id="endorse">Endorse</button></td>
+					@else
+                      <td><button id="endorse" disabled>Endorse</button></td>
+					@endif 
+					
                     <!-- <td>{{ link_to_route('articles.edit', 'Edit', array($article->id), array('class' => 'btn btn-info')) }}</td> -->
                     <!-- <td>
                         {{ Form::open(array('method' => 'DELETE', 'route' => array('articles.destroy', $article->id))) }}
@@ -68,6 +73,7 @@ $(document).ready(function(){
 		</tr>
 	</tbody>
 </table>
+
 <div>
            <ul id ="comments">
 			@foreach ($comments as $comment)

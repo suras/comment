@@ -71,7 +71,8 @@ class ArticlesController extends BaseController {
 		$article = $this->article->findOrFail($id);
 		$comments = $article->comments;
         $article_owner = $article->user;
-		return View::make('articles.show', compact('article', 'comments', 'article_owner'));
+        $is_endorsed = DB::table('endorsements')->where('article_id', $id)->where('user_id', Auth::user()->id)->first();
+		return View::make('articles.show', compact('article', 'comments', 'article_owner', 'is_endorsed'));
 	}
 
 	/**
@@ -133,18 +134,26 @@ class ArticlesController extends BaseController {
 
 	public function endorse()
 	{
-      
-      $endorsement = new Endorsement;
-      $endorsement->article_id = Input::get('id');
-      $endorsement->user_id = Auth::user()->id;
-      if($endorsement->save())
+      $is_endorsed = DB::table('endorsements')->where('article_id', Input::get('id'))->where('user_id', Auth::user()->id)->first();
+      if(count($is_endorsed) <= 0)
       {
-       return "success";
+	      $endorsement = new Endorsement;
+	      $endorsement->article_id = Input::get('id');
+	      $endorsement->user_id = Auth::user()->id;
+	      if($endorsement->save())
+	      {
+	        return "success";
+	      }
+	      else
+	      {
+	        return "error";
+	      }
       }
       else
       {
-       return "error";
+      	return "Already Endrosed";
       }
+    
 	}
 
 }
