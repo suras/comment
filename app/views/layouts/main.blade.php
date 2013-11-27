@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
  
     <title>Comment System</title>
-    <script src="http://code.jquery.com/jquery-1.9.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     {{ HTML::style('packages/bootstrap/css/bootstrap.min.css') }}
    {{ HTML::style('css/main.css')}}
 
